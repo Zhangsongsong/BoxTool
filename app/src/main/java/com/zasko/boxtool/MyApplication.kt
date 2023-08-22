@@ -7,6 +7,7 @@ import android.os.Build
 import android.os.Process
 import androidx.core.content.getSystemService
 import com.zasko.boxtool.components.HttpComponent
+import com.zasko.boxtool.components.SerializationComponent
 import com.zasko.boxtool.helper.LogUtil
 
 class MyApplication : Application() {
@@ -53,6 +54,8 @@ class MyApplication : Application() {
     }
 
     private fun componentsInit() {
+
+        SerializationComponent.init()
         HttpComponent.init()
     }
 }
