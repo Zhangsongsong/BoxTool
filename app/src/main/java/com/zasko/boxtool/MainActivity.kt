@@ -18,7 +18,7 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
 
-        val dis = HttpComponent.createServer(TestServer::class.java).getBaiDuInfo().doOnSuccess {
+        val dis = HttpComponent.createServer(TestServer::class.java).getMengNiangInfo().doOnSuccess {
             LogUtil.dPrintln("$TAG  result:$it")
         }.subscribe({}, {})
     }

@@ -18,6 +18,10 @@ interface TestServer {
 
     @GET
     fun getTestJson(@Url url: String = "https://testservice.zhichenghn.cn/api/v1/common/share_info?uid=100497&openid=_000yP89-wOlqZ-vZ4TavzscN6pygrxBY4vL&cv=QMBJ1.9.14_Android_DOUYIN_QMBJ&log_id=1109000902%2C1109000604%2C1109000304%2C1109000502%2C1109001102%2C1109000102%2C1109001204%2C1109001502%2C1109000703%2C1109000402%2C1109001302&scene_id=990001&type=1"): Single<TestJsonBean>
+
+    @GET
+    @ResponseFormat(value = ResponseFormatConstant.HTML)
+    fun getMengNiangInfo(@Url url: String = "https://www.moepro.cn/"): Single<String>
 }
 
 data class TestJsonBean(val dm_error: Int)
