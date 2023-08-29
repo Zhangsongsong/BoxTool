@@ -22,6 +22,10 @@ interface TestServer {
     @GET
     @ResponseFormat(value = ResponseFormatConstant.HTML)
     fun getMengNiangInfo(@Url url: String = "https://www.moepro.cn/"): Single<String>
+
+    @GET
+    @ResponseFormat(value = ResponseFormatConstant.HTML)
+    fun getNovelHtml(@Url url: String = "https://www.hanyunzw.com"): Single<String>
 }
 
 data class TestJsonBean(val dm_error: Int)
