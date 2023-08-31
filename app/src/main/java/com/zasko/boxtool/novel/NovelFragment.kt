@@ -22,7 +22,12 @@ class NovelFragment : BaseFragment() {
     }
 
     private fun initView() {
+
+        NovelManager.getRecommendList { list ->
+
+        }.bindLife()
         viewBinding.swipeRefreshLayout.setOnRefreshListener {
+
             GlobalScope.launch(Dispatchers.Main) {
                 delay(2000)
                 viewBinding.swipeRefreshLayout.isRefreshing = false

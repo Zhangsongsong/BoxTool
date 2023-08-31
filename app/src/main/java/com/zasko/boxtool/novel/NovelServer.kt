@@ -14,4 +14,4 @@ interface NovelServer {
 
 }
 
-data class RecommendListBean(var title: String = "")
+data class RecommendListBean(var title: String = "", var img: String = "")
