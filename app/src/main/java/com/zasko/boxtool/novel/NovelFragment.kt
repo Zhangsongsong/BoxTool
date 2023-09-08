@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.databinding.NovelFragmentBinding
+import com.zasko.boxtool.novel.adapter.NovelListAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -21,19 +23,33 @@ class NovelFragment : BaseFragment() {
         return viewBinding.root
     }
 
+
+    override fun firstInit() {
+        super.firstInit()
+        getDataList()
+    }
+
+    private var mAdapter: NovelListAdapter? = null
+
     private fun initView() {
 
-        NovelManager.getRecommendList { list ->
-
-        }.bindLife()
-        viewBinding.swipeRefreshLayout.setOnRefreshListener {
-
-            GlobalScope.launch(Dispatchers.Main) {
-                delay(2000)
-                viewBinding.swipeRefreshLayout.isRefreshing = false
-            }
+        mAdapter = NovelListAdapter()
+        viewBinding.recyclerView.let {
+            it.layoutManager = LinearLayoutManager(context)
+            it.adapter = mAdapter
         }
 
+        viewBinding.swipeRefreshLayout.setOnRefreshListener {
+            getDataList()
+        }
+    }
+
+
+    private fun getDataList() {
+        NovelManager.getRecommendList { list ->
+            mAdapter?.setData(list)
+            viewBinding.swipeRefreshLayout.isRefreshing = false
+        }.bindLife()
     }
 
 }

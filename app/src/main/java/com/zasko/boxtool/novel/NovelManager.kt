@@ -34,7 +34,7 @@ object NovelManager {
                 val title = element.text()
                 val img = element.select("img")?.first()?.attr("src") ?: ""
                 LogUtil.dPrintln("$TAG getRecommendList title:${title} ${HanYunSelect.BASE_URL + img}")
-                tmpList.add(RecommendListBean(title = title, img = img))
+                tmpList.add(RecommendListBean(title = title, img = HanYunSelect.BASE_URL + img))
             }
             Single.just(tmpList)
         }.observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
