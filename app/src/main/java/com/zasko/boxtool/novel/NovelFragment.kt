@@ -26,21 +26,31 @@ class NovelFragment : BaseFragment() {
 
     override fun firstInit() {
         super.firstInit()
-        getDataList()
+        NovelManager.checkInitAndCallback {
+            getDataList()
+        }
     }
+
 
     private var mAdapter: NovelListAdapter? = null
 
     private fun initView() {
 
-        mAdapter = NovelListAdapter()
+        mAdapter = NovelListAdapter { bean, _ ->
+
+
+        }
         viewBinding.recyclerView.let {
             it.layoutManager = LinearLayoutManager(context)
             it.adapter = mAdapter
         }
 
         viewBinding.swipeRefreshLayout.setOnRefreshListener {
-            getDataList()
+//            getDataList()
+            GlobalScope.launch(Dispatchers.Main) {
+                delay(1000)
+                viewBinding.swipeRefreshLayout.isRefreshing = false
+            }
         }
     }
 

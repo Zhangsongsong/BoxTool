@@ -10,6 +10,7 @@ import com.zasko.boxtool.databinding.ActivityMainBinding
 import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.http.TestServer
 import com.zasko.boxtool.novel.NovelFragment
+import com.zasko.boxtool.novel.NovelManager
 
 class MainActivity : BaseActivity() {
 
@@ -25,6 +26,7 @@ class MainActivity : BaseActivity() {
 
     init {
         fragmentsMap = HashMap()
+        NovelManager.initHelper()
     }
 
 

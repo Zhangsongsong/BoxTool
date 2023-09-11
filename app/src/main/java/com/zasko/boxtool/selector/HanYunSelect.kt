@@ -9,6 +9,10 @@ object HanYunSelect {
     const val BASE_URL = "https://www.hanyunzw.com"
 
 
+    fun getUrl(href: String): String {
+        return "$BASE_URL/$href"
+    }
+
     fun getRecommendElements(htmlString: String): Elements? {
         val html = Jsoup.parse(htmlString)
         val body = html.select("body > section:nth-child(4)")?.first()

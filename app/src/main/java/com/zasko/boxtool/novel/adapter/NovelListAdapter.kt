@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.zasko.boxtool.databinding.NovelItemListBinding
 import com.zasko.boxtool.novel.RecommendListBean
 import com.zasko.boxtool.utils.loadImage
+import com.zasko.boxtool.utils.onClick
 
-class NovelListAdapter : Adapter<ViewHolder>() {
+class NovelListAdapter(private val itemClickListener: (RecommendListBean, Int) -> Unit) : Adapter<ViewHolder>() {
 
     private val data = ArrayList<RecommendListBean>()
 
@@ -21,7 +22,7 @@ class NovelListAdapter : Adapter<ViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return MHolder(NovelItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return MHolder(NovelItemListBinding.inflate(LayoutInflater.from(parent.context), parent, false), callback = itemClickListener)
     }
 
     override fun getItemCount(): Int {
@@ -34,9 +35,22 @@ class NovelListAdapter : Adapter<ViewHolder>() {
         }
     }
 
-    private class MHolder(private val binding: NovelItemListBinding) : ViewHolder(binding.root) {
+    private class MHolder(private val binding: NovelItemListBinding, private val callback: (RecommendListBean, Int) -> Unit) :
+        ViewHolder(binding.root) {
+
+        private var beanInfo: RecommendListBean? = null
+
+        init {
+            binding.contentCon.onClick {
+                beanInfo?.let {
+                    callback.invoke(it, adapterPosition)
+                }
+            }
+
+        }
 
         fun bind(info: RecommendListBean) {
+            beanInfo = info
             binding.coverIv.loadImage(info.img)
             binding.titleTv.text = info.title
         }
