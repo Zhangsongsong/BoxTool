@@ -6,6 +6,7 @@ import com.zasko.boxtool.selector.HanYunSelect
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Url
+import java.io.Serializable
 
 interface NovelServer {
 
@@ -22,7 +23,7 @@ interface NovelServer {
 
 }
 
-data class RecommendListBean(var title: String = "", var img: String = "", var href: String = "")
+data class RecommendListBean(var title: String = "", var img: String = "", var href: String = "") : Serializable
 
 
 data class BookDetailBean(

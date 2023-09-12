@@ -1,25 +1,18 @@
 package com.zasko.boxtool.novel
 
-import com.zasko.boxtool.components.HttpComponent
-import com.zasko.boxtool.helper.LogUtil
-import com.zasko.boxtool.novel.listener.HanYunHelper
+import com.zasko.boxtool.novel.listener.HanYunImpl
 import com.zasko.boxtool.novel.listener.NovelApi
-import com.zasko.boxtool.selector.HanYunSelect
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
-import org.jsoup.Jsoup
-import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.CopyOnWriteArraySet
 
 object NovelManager {
 
     private const val TAG = "NovelManager"
 
-    private lateinit var apiHelper: NovelApi
+    private lateinit var apiImpl: NovelApi
     private var isInitSuccess = false
     fun initHelper() {
-        apiHelper = HanYunHelper()
+        apiImpl = HanYunImpl()
         isInitSuccess = true
     }
 
@@ -59,6 +52,10 @@ object NovelManager {
      * 获取推荐列表
      */
     fun getRecommendList(callback: (List<RecommendListBean>) -> Unit): Disposable {
-        return apiHelper.getRecommendList(callback)
+        return apiImpl.getRecommendList(callback)
+    }
+
+    fun getBookDetail(url: String, callback: (BookDetailBean) -> Unit): Disposable? {
+        return apiImpl.getBookDetail(url, callback)
     }
 }

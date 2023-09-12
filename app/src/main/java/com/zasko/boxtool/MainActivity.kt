@@ -34,16 +34,6 @@ class MainActivity : BaseActivity() {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val dis = HttpComponent.createServer(TestServer::class.java).getNovelHtml().doOnSuccess {
-            LogUtil.dPrintln("$TAG  result:$it")
-        }.subscribe({}, {})
-
-    }
-
     override fun initView() {
         super.initView()
 
