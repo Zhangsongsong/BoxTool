@@ -13,6 +13,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import org.jsoup.Jsoup
 
 class HanYunImpl : NovelApi {
 
@@ -66,8 +67,9 @@ class HanYunImpl : NovelApi {
 //        val disposable = novelServer.getBookDetail(url).
         val disposable =
             Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_BOOK_DETAIL_HTML)).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
-                    LogUtil.dPrintln("$TAG getBookDetail $it")
+                .observeOn(AndroidSchedulers.mainThread()).doOnSuccess { result ->
+//                    LogUtil.dPrintln("$TAG getBookDetail $it")
+                    callback.invoke(HanYunSelect.getBookDetailBean(result))
                 }.subscribe({}, {})
         return disposable
     }
