@@ -12,4 +12,8 @@ interface NovelApi {
         return null
     }
 
+    fun getArticleDetail(url: String, callback: (String) -> Unit): Disposable? {
+        return null
+    }
+
 }

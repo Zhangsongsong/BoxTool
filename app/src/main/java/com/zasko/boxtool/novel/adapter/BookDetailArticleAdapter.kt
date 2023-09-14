@@ -6,8 +6,9 @@ import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.zasko.boxtool.databinding.NovelBookDetailArticleBinding
 import com.zasko.boxtool.novel.ArticleBean
+import com.zasko.boxtool.utils.onClick
 
-class BookDetailArticleAdapter : Adapter<ViewHolder>() {
+class BookDetailArticleAdapter(private val itemClick: (ArticleBean, Int) -> Unit) : Adapter<ViewHolder>() {
 
     private val data = ArrayList<ArticleBean>()
 
@@ -32,9 +33,20 @@ class BookDetailArticleAdapter : Adapter<ViewHolder>() {
         }
     }
 
-    private class MHolder(private val binding: NovelBookDetailArticleBinding) : ViewHolder(binding.root) {
+    inner class MHolder(private val binding: NovelBookDetailArticleBinding) : ViewHolder(binding.root) {
+
+        private var beanInfo: ArticleBean? = null
+
+        init {
+            binding.contentCv.onClick {
+                beanInfo?.let {
+                    itemClick.invoke(it, adapterPosition)
+                }
+            }
+        }
 
         fun binding(bean: ArticleBean) {
+            beanInfo = bean
             binding.contentTv.text = bean.content
         }
     }

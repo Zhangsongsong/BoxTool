@@ -7,6 +7,7 @@ import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.databinding.NovelFragmentBookDetailBinding
 import com.zasko.boxtool.novel.NovelManager
+import com.zasko.boxtool.novel.activity.ReadBookActivity
 import com.zasko.boxtool.novel.adapter.BookDetailArticleAdapter
 import com.zasko.boxtool.novel.view.ArticleItemDecoration
 import com.zasko.boxtool.utils.loadImage
@@ -33,7 +34,9 @@ class BookDetailFragment : BaseFragment() {
         }
         viewBinding.articleRv.layoutManager = LinearLayoutManager(context)
         viewBinding.articleRv.addItemDecoration(ArticleItemDecoration())
-        artAdapter = BookDetailArticleAdapter()
+        artAdapter = BookDetailArticleAdapter { bean, _ ->
+            activity?.let { ReadBookActivity.start(it, bean) }
+        }
         viewBinding.articleRv.adapter = artAdapter
 
 

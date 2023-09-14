@@ -48,6 +48,20 @@ object NovelManager {
         }
     }
 
+
+    /**
+     * 当前存放的
+     */
+
+    private var currentBookDetailBean: BookDetailBean? = null
+    fun updateCurrentBookDetailBean(bean: BookDetailBean) {
+        currentBookDetailBean = bean
+    }
+
+    fun getCurrentBookDetailBean(): BookDetailBean? {
+        return currentBookDetailBean
+    }
+
     /**
      * 获取推荐列表
      */
@@ -58,4 +72,10 @@ object NovelManager {
     fun getBookDetail(url: String, callback: (BookDetailBean) -> Unit): Disposable? {
         return apiImpl.getBookDetail(url, callback)
     }
+
+    fun getArticleDetail(url: String, callback: (String) -> Unit): Disposable? {
+        return apiImpl.getArticleDetail(url, callback)
+    }
+
+
 }

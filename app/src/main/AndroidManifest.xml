@@ -30,6 +30,10 @@
         <activity
             android:name=".novel.activity.BookDetailActivity"
             android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".novel.activity.ReadBookActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -7,4 +7,7 @@ object HtmlConstants {
 
     const val HAN_YUN_BOOK_DETAIL_HTML = "novel/book_detail_html"
 
+    const val HAN_YUN_ARTICLE_DETAIL = "novel/article_detail_html"
+
+
 }

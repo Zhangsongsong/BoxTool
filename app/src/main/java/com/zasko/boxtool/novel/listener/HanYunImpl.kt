@@ -73,4 +73,16 @@ class HanYunImpl : NovelApi {
                 }.subscribe({}, {})
         return disposable
     }
+
+
+    override fun getArticleDetail(url: String, callback: (String) -> Unit): Disposable? {
+//        val disposable = novelServer.getArticleDetail(url).
+        val disposable =
+            Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_ARTICLE_DETAIL)).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
+                    callback.invoke(HanYunSelect.getArticleDetailBean(it))
+                }.subscribe({}, {})
+        return disposable
+    }
+
 }

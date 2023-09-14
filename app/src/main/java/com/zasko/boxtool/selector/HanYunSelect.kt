@@ -56,7 +56,18 @@ object HanYunSelect {
             articleList.add(ArticleBean(href = getUrl(href), content = content))
         }
         bean.articleList = articleList
-        LogUtil.dPrintln("${HanYunImpl.TAG} getBookDetail bean:${bean}")
+//        LogUtil.dPrintln("${HanYunImpl.TAG} getBookDetail bean:${bean}")
         return bean
+    }
+
+    fun getArticleDetailBean(htmlString: String): String {
+        val html = Jsoup.parse(htmlString)
+        val contentHtml = html.select("#content > div.content")?.first()
+        //处理 有<p> 的语法
+        contentHtml?.select("p")?.forEach {
+            it.text("\u3000\u3000" + it.ownText())
+        }
+        LogUtil.dPrintln("${HanYunImpl.TAG}  getArticleDetailBean contentHtml:${contentHtml?.html()}")
+        return contentHtml?.html() ?: ""
     }
 }
