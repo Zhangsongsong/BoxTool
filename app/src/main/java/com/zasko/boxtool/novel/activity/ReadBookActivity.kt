@@ -16,7 +16,7 @@ class ReadBookActivity : BaseActivity() {
     companion object {
 
 
-        private const val KEY_TRANS_DATA = "key_tran_data"
+        const val KEY_TRANS_DATA = "key_tran_data"
         fun start(context: Context, bean: ArticleBean) {
             val intent = Intent(context, ReadBookActivity::class.java)
             intent.putExtra(KEY_TRANS_DATA, bean)

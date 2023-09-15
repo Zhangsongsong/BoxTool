@@ -38,12 +38,12 @@ class NovelFragment : BaseFragment() {
                 hideLoading()
 
                 //TODO 测试
-                delay(2000)
-                activity?.let {
-                    BookDetailActivity.start(
-                        it, RecommendListBean(title = "快穿女主她无所不能", img = "https://www.hanyunzw.com/cover/5/DFEBXQ.jpg", href = "/hy/DFEBXQ.html")
-                    )
-                }
+//                delay(2000)
+//                activity?.let {
+//                    BookDetailActivity.start(
+//                        it, RecommendListBean(title = "快穿女主她无所不能", img = "https://www.hanyunzw.com/cover/5/DFEBXQ.jpg", href = "/hy/DFEBXQ.html")
+//                    )
+//                }
             }
         }
     }

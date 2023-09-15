@@ -38,8 +38,8 @@ class HanYunImpl : NovelApi {
     override fun getRecommendList(callback: (List<RecommendListBean>) -> Unit): Disposable {
 
 
-//        val disposable = novelServer.getHanYunHomeHtml().flatMap { result ->
-        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_HOME_HTML)).flatMap { result ->
+        val disposable = novelServer.getHanYunHomeHtml().flatMap { result ->
+//        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_HOME_HTML)).flatMap { result ->
             val tmpList = ArrayList<RecommendListBean>()
             HanYunSelect.getRecommendElements(result)?.forEach { element ->
 //                LogUtil.dPrintln("$TAG element:${element}")
@@ -54,7 +54,7 @@ class HanYunImpl : NovelApi {
                 val img = element.select("img")?.first()?.attr("src") ?: ""
                 val href = element.select("a")?.first()?.attr("href") ?: ""
                 LogUtil.dPrintln("$TAG getRecommendList title:${title} url:${HanYunSelect.BASE_URL + img} href:${href}")
-                tmpList.add(RecommendListBean(title = title, img = HanYunSelect.BASE_URL + img, href = href))
+                tmpList.add(RecommendListBean(title = title, img = HanYunSelect.BASE_URL + img, href = HanYunSelect.getUrl(href)))
             }
             Single.just(tmpList)
         }.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
@@ -64,24 +64,22 @@ class HanYunImpl : NovelApi {
     }
 
     override fun getBookDetail(url: String, callback: (BookDetailBean) -> Unit): Disposable {
-//        val disposable = novelServer.getBookDetail(url).
-        val disposable =
-            Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_BOOK_DETAIL_HTML)).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).doOnSuccess { result ->
+        val disposable = novelServer.getBookDetail(url)
+//        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_BOOK_DETAIL_HTML))
+            .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSuccess { result ->
 //                    LogUtil.dPrintln("$TAG getBookDetail $it")
-                    callback.invoke(HanYunSelect.getBookDetailBean(result))
-                }.subscribe({}, {})
+                callback.invoke(HanYunSelect.getBookDetailBean(result))
+            }.subscribe({}, {})
         return disposable
     }
 
 
     override fun getArticleDetail(url: String, callback: (String) -> Unit): Disposable? {
-//        val disposable = novelServer.getArticleDetail(url).
-        val disposable =
-            Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_ARTICLE_DETAIL)).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
-                    callback.invoke(HanYunSelect.getArticleDetailBean(it))
-                }.subscribe({}, {})
+        val disposable = novelServer.getArticleDetail(url)
+//        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_ARTICLE_DETAIL))
+            .subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
+                callback.invoke(HanYunSelect.getArticleDetailBean(it))
+            }.subscribe({}, {})
         return disposable
     }
 
