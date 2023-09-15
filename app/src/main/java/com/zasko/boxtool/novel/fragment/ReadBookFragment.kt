@@ -38,6 +38,8 @@ class ReadBookFragment : BaseFragment() {
         viewBinding.actionBarInclude.backFl.onClick {
             activity?.finish()
         }
+
+        viewBinding.actionBarInclude.actionBarTitleTv.text = transData?.content ?: ""
     }
 
 
