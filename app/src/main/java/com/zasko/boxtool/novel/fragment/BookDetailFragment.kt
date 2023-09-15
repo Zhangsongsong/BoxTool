@@ -63,11 +63,13 @@ class BookDetailFragment : BaseFragment() {
 
     override fun firstInit() {
         super.firstInit()
+        showLoading(viewBinding.root)
         getData()
 
     }
 
     private fun getData() {
+
         NovelManager.getBookDetail(url = transData?.href ?: "") { bean ->
             viewBinding.thumbIv.loadImage(bean.img)
             viewBinding.titleTv.text = bean.title
@@ -78,6 +80,8 @@ class BookDetailFragment : BaseFragment() {
             viewBinding.introductionTv.text = bean.introduction
 
             artAdapter?.setData(bean.articleList)
+
+            hideLoading()
         }?.bindLife()
     }
 }

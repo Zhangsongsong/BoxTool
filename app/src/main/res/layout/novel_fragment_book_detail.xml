@@ -6,16 +6,9 @@
     android:layout_height="match_parent">
 
 
-    <include
-        android:id="@+id/actionBarInclude"
-        layout="@layout/include_action_bar"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/actionBarInclude">
+        android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -31,20 +24,23 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingStart="16dp"
-                    android:paddingTop="10dp"
-
-                    android:paddingEnd="16dp"
                     android:paddingBottom="10dp">
+
+                    <include
+                        android:id="@+id/actionBarInclude"
+                        layout="@layout/include_action_bar"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/thumbCv"
                         android:layout_width="90dp"
                         android:layout_height="130dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="0dp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@id/actionBarInclude">
 
                         <ImageView
                             android:id="@+id/thumbIv"
@@ -115,7 +111,9 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:maxLines="4"
+                        android:paddingStart="8dp"
                         android:paddingTop="8dp"
+                        android:paddingEnd="8dp"
                         android:textColor="@color/color_999999"
                         android:textSize="13sp"
                         app:layout_constraintTop_toBottomOf="@id/thumbCv"

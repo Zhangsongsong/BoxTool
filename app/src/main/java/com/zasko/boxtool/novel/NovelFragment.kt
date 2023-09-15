@@ -4,11 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.appbar.AppBarLayout
 import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.databinding.NovelFragmentBinding
 import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.novel.activity.BookDetailActivity
+import com.zasko.boxtool.novel.activity.SearchActivity
 import com.zasko.boxtool.novel.adapter.NovelListAdapter
+import com.zasko.boxtool.utils.dp
+import com.zasko.boxtool.utils.onClick
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
@@ -36,14 +40,6 @@ class NovelFragment : BaseFragment() {
                 delay(1000)
                 getDataList()
                 hideLoading()
-
-                //TODO 测试
-//                delay(2000)
-//                activity?.let {
-//                    BookDetailActivity.start(
-//                        it, RecommendListBean(title = "快穿女主她无所不能", img = "https://www.hanyunzw.com/cover/5/DFEBXQ.jpg", href = "/hy/DFEBXQ.html")
-//                    )
-//                }
             }
         }
     }
@@ -52,6 +48,10 @@ class NovelFragment : BaseFragment() {
     private var mAdapter: NovelListAdapter? = null
 
     override fun initView() {
+
+        viewBinding.appBarLayout.addOnOffsetChangedListener { appBarLayout, verticalOffset ->
+            viewBinding.swipeRefreshLayout.isEnabled = verticalOffset >= 0
+        }
 
         mAdapter = NovelListAdapter { bean, _ ->
             LogUtil.dPrintln("$TAG bean:${bean} ")
@@ -68,6 +68,10 @@ class NovelFragment : BaseFragment() {
                 delay(1000)
                 viewBinding.swipeRefreshLayout.isRefreshing = false
             }
+        }
+
+        viewBinding.searchIv.onClick {
+            activity?.let { it1 -> SearchActivity.start(it1) }
         }
     }
 

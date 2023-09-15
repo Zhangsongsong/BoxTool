@@ -16,4 +16,9 @@ interface NovelApi {
         return null
     }
 
+
+    fun searchBook(key: String, callback: (String) -> Unit): Disposable? {
+        return null
+    }
+
 }

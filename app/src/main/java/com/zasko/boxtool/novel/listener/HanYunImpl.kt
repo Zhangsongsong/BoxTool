@@ -38,8 +38,8 @@ class HanYunImpl : NovelApi {
     override fun getRecommendList(callback: (List<RecommendListBean>) -> Unit): Disposable {
 
 
-        val disposable = novelServer.getHanYunHomeHtml().flatMap { result ->
-//        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_HOME_HTML)).flatMap { result ->
+//        val disposable = novelServer.getHanYunHomeHtml().flatMap { result ->
+        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_HOME_HTML)).flatMap { result ->
             val tmpList = ArrayList<RecommendListBean>()
             HanYunSelect.getRecommendElements(result)?.forEach { element ->
 //                LogUtil.dPrintln("$TAG element:${element}")
@@ -81,6 +81,12 @@ class HanYunImpl : NovelApi {
                 callback.invoke(HanYunSelect.getArticleDetailBean(it))
             }.subscribe({}, {})
         return disposable
+    }
+
+
+    override fun searchBook(key: String, callback: (String) -> Unit): Disposable? {
+        return super.searchBook(key, callback)
+
     }
 
 }
