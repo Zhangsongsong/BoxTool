@@ -1,6 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            app:elevation="0dp">
+
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/color_f1ccc0">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/searchEdit"
+                        android:layout_width="0dp"
+                        android:layout_height="48dp"
+                        android:background="@null"
+                        android:hint="凡人修仙传"
+                        android:maxLines="1"
+                        android:paddingStart="48dp"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/color_efefef"
+                        android:textSize="16sp"
+
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/searchIv"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/icon_novel_search"
+                        app:layout_constraintStart_toStartOf="@id/searchEdit"
+                        app:layout_constraintTop_toTopOf="@id/searchEdit"
+                        app:tint="@color/white" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </FrameLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
