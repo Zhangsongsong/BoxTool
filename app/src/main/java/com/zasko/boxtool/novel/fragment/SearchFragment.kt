@@ -6,6 +6,7 @@ import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.databinding.NovelFragmentSearchBinding
 import com.zasko.boxtool.helper.LogUtil
+import com.zasko.boxtool.novel.NovelManager
 import com.zasko.boxtool.utils.onClick
 
 class SearchFragment : BaseFragment() {
@@ -32,8 +33,16 @@ class SearchFragment : BaseFragment() {
         }
     }
 
+    override fun firstInit() {
+        super.firstInit()
+        startSearch("")
+    }
+
     private fun startSearch(key: String) {
         LogUtil.dPrintln("$TAG startSearch:${key}")
+        NovelManager.searchBook(key) {
+
+        }?.bindLife()
     }
 
 }

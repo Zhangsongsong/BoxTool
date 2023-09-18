@@ -18,4 +18,9 @@
     <color name="color_d6d5d5">#F6ECE8</color>
 
     <color name="book_bg">#F6ECE8</color>
+
+
+    <!--view-->
+    <color name="color_title">@color/color_999999</color>
+    <color name="color_content">@color/color_999999</color>
 </resources>

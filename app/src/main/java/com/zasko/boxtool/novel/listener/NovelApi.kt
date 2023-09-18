@@ -2,6 +2,7 @@ package com.zasko.boxtool.novel.listener
 
 import com.zasko.boxtool.novel.BookDetailBean
 import com.zasko.boxtool.novel.RecommendListBean
+import com.zasko.boxtool.novel.SearchBookBean
 import io.reactivex.rxjava3.disposables.Disposable
 
 interface NovelApi {
@@ -17,7 +18,7 @@ interface NovelApi {
     }
 
 
-    fun searchBook(key: String, callback: (String) -> Unit): Disposable? {
+    fun searchBook(key: String, callback: (List<SearchBookBean>) -> Unit): Disposable? {
         return null
     }
 

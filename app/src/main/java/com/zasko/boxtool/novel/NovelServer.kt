@@ -26,6 +26,11 @@ interface NovelServer {
     @ResponseFormat(value = ResponseFormatConstant.HTML)
     fun getArticleDetail(@Url url: String = ""): Single<String>
 
+
+    @GET
+    @ResponseFormat(value = ResponseFormatConstant.HTML)
+    fun searchBook(@Url url: String = ""): Single<String>
+
 }
 
 data class RecommendListBean(var title: String = "", var img: String = "", var href: String = "") : Serializable
@@ -46,3 +51,7 @@ data class ArticleBean(
     var href: String = "", var content: String = ""
 ) : Serializable
 
+
+data class SearchBookBean(
+    var title: String = "", var img: String = "", var author: String = "", var introduction: String = "", var href: String = ""
+) : Serializable

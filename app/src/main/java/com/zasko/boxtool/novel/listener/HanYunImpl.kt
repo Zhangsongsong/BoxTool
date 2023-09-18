@@ -3,10 +3,7 @@ package com.zasko.boxtool.novel.listener
 import com.zasko.boxtool.MyApplication
 import com.zasko.boxtool.components.HttpComponent
 import com.zasko.boxtool.helper.LogUtil
-import com.zasko.boxtool.novel.BookDetailBean
-import com.zasko.boxtool.novel.HtmlConstants
-import com.zasko.boxtool.novel.NovelServer
-import com.zasko.boxtool.novel.RecommendListBean
+import com.zasko.boxtool.novel.*
 import com.zasko.boxtool.selector.HanYunSelect
 import com.zasko.boxtool.utils.FileUtils
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -84,9 +81,12 @@ class HanYunImpl : NovelApi {
     }
 
 
-    override fun searchBook(key: String, callback: (String) -> Unit): Disposable? {
-        return super.searchBook(key, callback)
-
+    override fun searchBook(key: String, callback: (List<SearchBookBean>) -> Unit): Disposable? {
+        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_SEARCH_HTML))
+//        val disposable = novelServer.searchBook(url = HanYunSelect.getUrl("/h8.php?search=${key}"))
+        return disposable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
+            callback.invoke(HanYunSelect.getSearchBookList(it))
+        }.subscribe({}, {})
     }
 
 }

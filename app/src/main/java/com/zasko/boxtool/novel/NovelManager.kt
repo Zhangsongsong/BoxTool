@@ -77,5 +77,9 @@ object NovelManager {
         return apiImpl.getArticleDetail(url, callback)
     }
 
+    fun searchBook(key: String, callback: (List<SearchBookBean>) -> Unit): Disposable? {
+        return apiImpl.searchBook(key, callback)
+    }
+
 
 }
