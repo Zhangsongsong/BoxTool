@@ -20,7 +20,9 @@
         <ImageView
             android:id="@+id/coverIv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:scaleType="centerCrop"
+            tools:src="@mipmap/icon_empty" />
     </androidx.cardview.widget.CardView>
 
     <TextView
@@ -33,4 +35,33 @@
         app:layout_constraintStart_toEndOf="@id/coverCardView"
         app:layout_constraintTop_toTopOf="@id/coverCardView"
         tools:text="斗破：开局攻略美杜莎，萧炎麻了" />
+
+    <TextView
+        android:id="@+id/authorTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:textColor="@color/color_title"
+        android:textSize="@dimen/content_size"
+        app:layout_constraintStart_toStartOf="@id/titleTv"
+        app:layout_constraintTop_toBottomOf="@id/titleTv"
+        tools:text="作者：小桀桀桀" />
+
+    <TextView
+        android:id="@+id/contentTv"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/color_title"
+        android:textSize="@dimen/content_size"
+        app:layout_constraintBottom_toBottomOf="@id/coverCardView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/titleTv"
+        app:layout_constraintTop_toBottomOf="@id/authorTv"
+        tools:text="穿越到斗气大陆，叶枫竟成为蛇人族女王美杜莎亲卫的一员！ 这岂不是近水楼台先得女王？ 又经神级签到系统奖励“天魂融血丹”一枚！ 嘶~恐怖如斯的滋养育儿丹，就这么来了！ 这难道就是传说中的未雨先绸？ 女王的运气~还真是好呢！ 萧炎：o(╥﹏╥)o 我~麻了啊！ ……………… 【爽文】【小白】【无敌】【轻松】【有点甜】" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

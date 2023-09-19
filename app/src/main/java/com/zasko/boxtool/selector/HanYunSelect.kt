@@ -96,8 +96,8 @@ object HanYunSelect {
                 val title = a?.text() ?: ""
                 val author = it.select("div > div h5")?.first()?.text() ?: ""
                 val introduction = it.select("div > div > p")?.first()?.text() ?: ""
-//                LogUtil.dPrintln("${HanYunImpl.TAG} getSearchBookList contentHtml: author:\n${author}")
-                list.add(SearchBookBean(title = title, img = img, author = author, introduction = introduction, href = href))
+                LogUtil.dPrintln("${HanYunImpl.TAG} getSearchBookList contentHtml: author:\n${it}")
+                list.add(SearchBookBean(title = title, img = getUrl(img), author = author, introduction = introduction, href = href))
             }
         }
         return list

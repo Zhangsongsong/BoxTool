@@ -6,6 +6,7 @@ import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.novel.*
 import com.zasko.boxtool.selector.HanYunSelect
 import com.zasko.boxtool.utils.FileUtils
+import com.zasko.boxtool.utils.runOnIO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
@@ -82,9 +83,11 @@ class HanYunImpl : NovelApi {
 
 
     override fun searchBook(key: String, callback: (List<SearchBookBean>) -> Unit): Disposable? {
-        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_SEARCH_HTML))
-//        val disposable = novelServer.searchBook(url = HanYunSelect.getUrl("/h8.php?search=${key}"))
+//        val disposable = Single.just(FileUtils.loadFileByAssets(MyApplication.application, HtmlConstants.HAN_YUN_SEARCH_HTML))
+        val url = HanYunSelect.getUrl("hy8.php?search=${key}")
+        val disposable = novelServer.searchBook(url = url)
         return disposable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).doOnSuccess {
+
             callback.invoke(HanYunSelect.getSearchBookList(it))
         }.subscribe({}, {})
     }
