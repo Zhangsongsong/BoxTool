@@ -51,7 +51,7 @@ data class BookDetailBean(
     var updateTime: String = "",
     var introduction: String = "",
     var articleList: List<ArticleBean> = emptyList()
-)
+) : Serializable
 
 data class ArticleBean(
     var href: String = "", var content: String = ""

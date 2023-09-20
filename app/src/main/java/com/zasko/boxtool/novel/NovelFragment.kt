@@ -9,6 +9,7 @@ import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.databinding.NovelFragmentBinding
 import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.novel.activity.BookDetailActivity
+import com.zasko.boxtool.novel.activity.BookDownloadActivity
 import com.zasko.boxtool.novel.activity.SearchActivity
 import com.zasko.boxtool.novel.adapter.NovelListAdapter
 import com.zasko.boxtool.utils.dp
@@ -42,7 +43,7 @@ class NovelFragment : BaseFragment() {
                 hideLoading()
 
                 delay(1000)
-                activity?.let { SearchActivity.start(it) }
+                activity?.let { BookDownloadActivity.start(it, bean = BookDetailBean()) }
             }
         }
     }
