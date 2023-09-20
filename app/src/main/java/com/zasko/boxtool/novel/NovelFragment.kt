@@ -40,6 +40,9 @@ class NovelFragment : BaseFragment() {
                 delay(1000)
                 getDataList()
                 hideLoading()
+
+                delay(1000)
+                activity?.let { SearchActivity.start(it) }
             }
         }
     }

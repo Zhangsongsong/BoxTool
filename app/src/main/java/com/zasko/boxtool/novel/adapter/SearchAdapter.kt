@@ -8,8 +8,9 @@ import com.zasko.boxtool.R
 import com.zasko.boxtool.databinding.NovelItemSearchBinding
 import com.zasko.boxtool.novel.SearchBookBean
 import com.zasko.boxtool.utils.loadImage
+import com.zasko.boxtool.utils.onClick
 
-class SearchAdapter : RecyclerView.Adapter<ViewHolder>() {
+class SearchAdapter(private val itemCallback: (SearchBookBean, Int) -> Unit) : RecyclerView.Adapter<ViewHolder>() {
     private val data = ArrayList<SearchBookBean>()
 
 
@@ -36,6 +37,15 @@ class SearchAdapter : RecyclerView.Adapter<ViewHolder>() {
 
     inner class MHolder(private val binding: NovelItemSearchBinding) : ViewHolder(binding.root) {
         private var beanInfo: SearchBookBean? = null
+
+
+        init {
+            binding.contentCon.onClick { _ ->
+                beanInfo?.let {
+                    itemCallback.invoke(it, adapterPosition)
+                }
+            }
+        }
 
         fun bind(bean: SearchBookBean) {
             beanInfo = bean
