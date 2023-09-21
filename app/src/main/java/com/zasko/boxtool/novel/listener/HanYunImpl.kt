@@ -92,4 +92,9 @@ class HanYunImpl : NovelApi {
         }.subscribe({}, {})
     }
 
+    override fun downloadBook(bean: BookDetailBean): Disposable? {
+        LogUtil.dPrintln("$TAG downloadBook:${bean}")
+        return null
+    }
+
 }

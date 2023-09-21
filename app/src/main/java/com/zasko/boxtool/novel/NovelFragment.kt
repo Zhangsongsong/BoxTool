@@ -43,7 +43,10 @@ class NovelFragment : BaseFragment() {
                 hideLoading()
 
                 delay(1000)
-                activity?.let { BookDownloadActivity.start(it, bean = BookDetailBean()) }
+
+                HtmlConstants.getBookDetail { bookDetailBean ->
+                    activity?.let { BookDownloadActivity.start(it, bean = bookDetailBean) }
+                }.bindLife()
             }
         }
     }

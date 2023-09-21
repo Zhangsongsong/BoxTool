@@ -22,7 +22,7 @@ interface NovelApi {
         return null
     }
 
-    fun downloadBook(bean: BookDetailBean) {
-
+    fun downloadBook(bean: BookDetailBean): Disposable? {
+        return null
     }
 }

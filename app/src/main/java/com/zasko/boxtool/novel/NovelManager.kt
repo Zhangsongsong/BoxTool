@@ -81,5 +81,9 @@ object NovelManager {
         return apiImpl.searchBook(key, callback)
     }
 
+    fun downloadBook(bookDetailBean: BookDetailBean): Disposable? {
+        return apiImpl.downloadBook(bookDetailBean)
+    }
+
 
 }
