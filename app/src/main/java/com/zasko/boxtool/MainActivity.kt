@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.base.act.BaseActivity
+import com.zasko.boxtool.cartoon.CartoonFragment
+import com.zasko.boxtool.cartoon.CartoonManager
 import com.zasko.boxtool.components.HttpComponent
 import com.zasko.boxtool.databinding.ActivityMainBinding
 import com.zasko.boxtool.helper.LogUtil
@@ -19,6 +21,7 @@ class MainActivity : BaseActivity() {
         const val TAG: String = "MainActivity"
 
         const val TAB_NOVEL = "tab_novel"
+        const val TAB_CARTOON = "tab_cartoon"
     }
 
 
@@ -27,6 +30,7 @@ class MainActivity : BaseActivity() {
     init {
         fragmentsMap = HashMap()
         NovelManager.initHelper()
+        CartoonManager.initHelper()
     }
 
 
@@ -37,7 +41,7 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
 
-        selectTab(TAB_NOVEL)
+        selectTab(TAB_CARTOON)
     }
 
     private fun selectTab(tab: String) {
@@ -55,6 +59,7 @@ class MainActivity : BaseActivity() {
         if (selectFragment == null) {
             val newFragment = when (tab) {
                 TAB_NOVEL -> NovelFragment()
+                TAB_CARTOON -> CartoonFragment()
                 else -> null
             }
             newFragment?.let {
