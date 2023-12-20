@@ -1,18 +1,15 @@
 package com.zasko.boxtool
 
-import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.base.act.BaseActivity
 import com.zasko.boxtool.cartoon.CartoonFragment
 import com.zasko.boxtool.cartoon.CartoonManager
-import com.zasko.boxtool.components.HttpComponent
 import com.zasko.boxtool.databinding.ActivityMainBinding
-import com.zasko.boxtool.helper.LogUtil
-import com.zasko.boxtool.http.TestServer
 import com.zasko.boxtool.novel.NovelFragment
 import com.zasko.boxtool.novel.NovelManager
+import com.zasko.boxtool.video.VideoListFragment
 
 class MainActivity : BaseActivity() {
 
@@ -22,6 +19,7 @@ class MainActivity : BaseActivity() {
 
         const val TAB_NOVEL = "tab_novel"
         const val TAB_CARTOON = "tab_cartoon"
+        const val TAB_VIDEO_LIST = "tab_video_list"
     }
 
 
@@ -41,7 +39,7 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
 
-        selectTab(TAB_CARTOON)
+        selectTab(TAB_VIDEO_LIST)
     }
 
     private fun selectTab(tab: String) {
@@ -60,6 +58,7 @@ class MainActivity : BaseActivity() {
             val newFragment = when (tab) {
                 TAB_NOVEL -> NovelFragment()
                 TAB_CARTOON -> CartoonFragment()
+                TAB_VIDEO_LIST -> VideoListFragment()
                 else -> null
             }
             newFragment?.let {
