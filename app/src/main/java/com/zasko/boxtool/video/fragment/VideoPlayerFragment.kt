@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.media3.common.MediaItem
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.ui.PlayerView
 import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.R
 import com.zasko.boxtool.base.fragment.BaseFragment
@@ -15,7 +14,6 @@ import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.http.PostVideoVerifyRequest
 import com.zasko.boxtool.http.TestServer
 import com.zasko.boxtool.http.VideoInfo
-import com.zasko.boxtool.utils.loadImage
 import com.zasko.boxtool.utils.swiThread
 import java.io.Serializable
 
@@ -97,7 +95,8 @@ class VideoPlayerFragment : BaseFragment() {
     override fun onDestroy() {
         super.onDestroy()
         LogUtil.ePrintln("$TAG this:${this} onDestroy ${bundleInfo.pos}")
-
+        player?.release()
+        player = null
     }
 }
 
