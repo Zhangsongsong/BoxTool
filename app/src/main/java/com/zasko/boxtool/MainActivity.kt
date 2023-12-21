@@ -9,6 +9,7 @@ import com.zasko.boxtool.cartoon.CartoonManager
 import com.zasko.boxtool.databinding.ActivityMainBinding
 import com.zasko.boxtool.novel.NovelFragment
 import com.zasko.boxtool.novel.NovelManager
+import com.zasko.boxtool.video.VideoListActivity
 import com.zasko.boxtool.video.VideoListFragment
 
 class MainActivity : BaseActivity() {
@@ -39,7 +40,8 @@ class MainActivity : BaseActivity() {
     override fun initView() {
         super.initView()
 
-        selectTab(TAB_VIDEO_LIST)
+        VideoListActivity.start(this)
+//        selectTab(TAB_VIDEO_LIST)
     }
 
     private fun selectTab(tab: String) {

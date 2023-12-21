@@ -10,4 +10,8 @@ object LogUtil {
         Log.d(TAG, msg)
     }
 
+    fun ePrintln(msg: String) {
+        Log.e(TAG, msg)
+    }
+
 }

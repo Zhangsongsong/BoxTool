@@ -23,6 +23,8 @@ class CustomConverterFactory : Converter.Factory() {
 
     private val stringFactory = ScalarsConverterFactory.create()
     private val jsonFactory = MoshiConverterFactory.create(SerializationComponent.getMoshi())
+//    private val jsonFactory = Gson.create(SerializationComponent.getMoshi())
+
 
 
     override fun responseBodyConverter(type: Type, annotations: Array<out Annotation>, retrofit: Retrofit): Converter<ResponseBody, *>? {

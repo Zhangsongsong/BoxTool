@@ -10,66 +10,59 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.adapter.FragmentViewHolder
+import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.video.fragment.VideoPlayerFragment
 
 class VideoPagerAdapter(activity: FragmentActivity) : FragmentStateAdapter(activity) {
+    companion object {
+        private const val TAG = "VideoPagerAdapter"
+    }
+
+
     private val data = ArrayList<VideoPlayerFragment>()
+
+    private val fragmentIds = ArrayList<Long>()
+    private val createIds = HashSet<Long>()
 
     fun setData(list: List<VideoPlayerFragment>) {
         data.clear()
         data.addAll(list)
+        update()
         notifyDataSetChanged()
+    }
+
+    private fun update() {
+        fragmentIds.clear()
+        createIds.clear()
+        data.forEach {
+            fragmentIds.add(it.hashCode().toLong())
+        }
     }
 
 
     override fun getItemCount(): Int {
-        return data.size
+        return Int.MAX_VALUE
     }
 
     override fun createFragment(position: Int): Fragment {
-        return data[position]
+        val index = position % data.size
+//        createIds.add(fragmentIds[index])
+        return data[index]
     }
 
-}
-
-class PagerSnapHelperImpl(private val content: Context) : PagerSnapHelper() {
-
-    companion object {
-        private const val MILLISECONDS_PER_INCH = 100f
-        private const val MAX_SCROLL_ON_FLING_DURATION = 120
+    //
+//    override fun getItemId(position: Int): Long {
+//        return fragmentIds[position % data.size]
+//    }
+//
+//    override fun containsItem(itemId: Long): Boolean {
+//        return createIds.contains(itemId)
+//    }
+    override fun onViewDetachedFromWindow(holder: FragmentViewHolder) {
+        super.onViewDetachedFromWindow(holder)
+        LogUtil.ePrintln("$TAG  onViewDetachedFromWindow adapterPosition:${holder.adapterPosition} pos:${holder.adapterPosition % data.size}")
 
     }
 
-    private var interpolator: DecelerateInterpolator = DecelerateInterpolator(2.1f)
-
-
-    override fun createScroller(layoutManager: RecyclerView.LayoutManager?): RecyclerView.SmoothScroller? {
-        if (layoutManager !is RecyclerView.SmoothScroller.ScrollVectorProvider) {
-            return null
-        }
-        return object : LinearSmoothScroller(content) {
-            override fun onTargetFound(targetView: View, state: RecyclerView.State, action: Action) {
-
-                val snapDistances = calculateDistanceToFinalSnap(layoutManager, targetView)
-                val dx = snapDistances?.get(0) ?: 0
-                val dy = snapDistances?.get(1) ?: 0
-                val time = calculateTimeForDeceleration(Math.max(Math.abs(dx), Math.abs(dy)));
-                if (time > 0) {
-                    // 使用自定义插值器
-                    action.update(dx, dy, time, interpolator);
-                }
-            }
-
-            override fun calculateSpeedPerPixel(displayMetrics: DisplayMetrics?): Float {
-                if (displayMetrics != null) {
-                    return MILLISECONDS_PER_INCH / displayMetrics.density
-                }
-                return super.calculateSpeedPerPixel(displayMetrics)
-            }
-
-            override fun calculateTimeForScrolling(dx: Int): Int {
-                return Math.min(MAX_SCROLL_ON_FLING_DURATION, super.calculateTimeForScrolling(dx))
-            }
-        }
-    }
 }

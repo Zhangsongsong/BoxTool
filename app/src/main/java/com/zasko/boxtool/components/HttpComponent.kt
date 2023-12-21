@@ -6,6 +6,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 object HttpComponent {
 
@@ -25,7 +26,8 @@ object HttpComponent {
         ).build()
         this.okHttpClient = client
 
-        val retrofit = Retrofit.Builder().baseUrl("https://www.baidu.com/").addConverterFactory(CustomConverterFactory.create())
+        val retrofit = Retrofit.Builder().baseUrl("https://www.baidu.com/")/*.addConverterFactory(CustomConverterFactory.create())*/
+            .addConverterFactory(MoshiConverterFactory.create(SerializationComponent.getMoshi()))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create()).client(client).build()
         this.retrofit = retrofit
 
