@@ -8,6 +8,7 @@ import android.os.Process
 import androidx.core.content.getSystemService
 import com.zasko.boxtool.components.HttpComponent
 import com.zasko.boxtool.components.SerializationComponent
+import com.zasko.boxtool.components.VideoCacheComponent
 import com.zasko.boxtool.helper.LogUtil
 
 class MyApplication : Application() {
@@ -57,5 +58,6 @@ class MyApplication : Application() {
 
         SerializationComponent.init()
         HttpComponent.init()
+        VideoCacheComponent.init(this)
     }
 }

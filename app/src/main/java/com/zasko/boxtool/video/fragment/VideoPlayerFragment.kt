@@ -10,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.R
 import com.zasko.boxtool.base.fragment.BaseFragment
 import com.zasko.boxtool.components.HttpComponent
+import com.zasko.boxtool.components.VideoCacheComponent
 import com.zasko.boxtool.databinding.VideoListPlayerFragmentBinding
 import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.http.PostVideoVerifyRequest
@@ -67,7 +68,8 @@ class VideoPlayerFragment : BaseFragment() {
             )
         ).swiThread().doOnSuccess { result ->
             result.data?.let {
-                player?.setMediaItem(MediaItem.fromUri(it.resource_url))
+
+                player?.setMediaItem(MediaItem.fromUri(VideoCacheComponent.getProxyUrl(it.resource_url)))
                 player?.prepare()
                 if (this.isResumed) {
                     binding.coverIv.isVisible = false
