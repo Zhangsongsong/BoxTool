@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.media3.common.MediaItem
+import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.viewbinding.ViewBinding
 import com.zasko.boxtool.R
@@ -56,6 +57,7 @@ class VideoPlayerFragment : BaseFragment() {
         player = ExoPlayer.Builder(binding.playerView.context).build()
 
         player?.let {
+            it.repeatMode = Player.REPEAT_MODE_ONE
             binding.playerView.setPlayer(it)
         }
 
