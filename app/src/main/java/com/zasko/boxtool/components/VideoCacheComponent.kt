@@ -2,9 +2,11 @@ package com.zasko.boxtool.components
 
 import android.app.Application
 import android.net.Uri
+import com.danikula.videocache.CacheListener
 import com.danikula.videocache.HttpProxyCacheServer
 import com.zasko.boxtool.helper.LogUtil
 import com.zasko.boxtool.utils.FileUtils
+import java.io.File
 
 object VideoCacheComponent {
 
@@ -39,8 +41,19 @@ object VideoCacheComponent {
 
     fun getProxyUrl(videoUrl: String): String {
         val url = mProxy.getProxyUrl(videoUrl)
+        mProxy.registerCacheListener(CacheListenerImpl(), videoUrl)
         LogUtil.dPrintln("$TAG getProxyUrl videoUrl:${videoUrl} url:${url}")
         return url
+    }
+
+    private class CacheListenerImpl : CacheListener {
+        override fun onCacheAvailable(cacheFile: File?, url: String?, percentsAvailable: Int) {
+            LogUtil.dPrintln("$TAG onCacheAvailable percentsAvailable:${percentsAvailable} url:${url}")
+            if (percentsAvailable >= 100) {
+                mProxy.unregisterCacheListener(this)
+            }
+        }
+
     }
 }
 
